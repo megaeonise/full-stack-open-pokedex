@@ -1,5 +1,4 @@
-import { defineConfig } from 'eslint/config';
-export default defineConfig({
+module.exports = {
   env: {
     browser: true,
     node: true,
@@ -27,4 +26,4 @@ export default defineConfig({
     'no-console': 'error',
     'react/prop-types': 0,
   },
-});
+}
