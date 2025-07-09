@@ -1,10 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 
 // get the port from env variable
-// eslint-disable-next-line
-console.log(process.env)
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 
