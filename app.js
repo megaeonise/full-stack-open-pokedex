@@ -11,3 +11,13 @@ app.listen(PORT, () => {
   // eslint-disable-next-line
   console.log(`server started on port ${PORT}`)
 })
+
+app.get('/version', (req, res) => {
+  res.send('1') // change this string to ensure a new version deployed
+})
+
+app.get('/health', (req, res) => {
+  // eslint-disable-next-line no-constant-condition
+  // if (true) throw('error...  ')
+  res.send('ok')
+})
