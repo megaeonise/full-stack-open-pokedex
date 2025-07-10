@@ -17,3 +17,25 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  success_notification:
+    name: Success notification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+        if: success()
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
+          details: to https://full-stack-open-pokedex-megaeonise.fly.dev/ by ${{github.actor}}
+          text: A new version of Pokedex deployed
+  failure_notification:
+    name: Failure notification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+        if: failure()
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: error
+          details: commit https://github.com/megaeonise/full-stack-open-pokedex/commit/${{github.sha}} by ${{github.actor}} broke the build :(
+          text: Build failed
