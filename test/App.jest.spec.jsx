@@ -21,7 +21,7 @@ describe('<App />', () => {
       render(<Router><App/></Router>)
     })
     expect(axiosMock.get).toHaveBeenCalledTimes(1)
-    expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=151')
+    expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=50')
   })
 
   it('shows error', async () => {
