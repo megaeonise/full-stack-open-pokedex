@@ -22,22 +22,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy]
     steps:
-      - uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+      - uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
         if: success()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: info
-          details: to https://full-stack-open-pokedex-megaeonise.fly.dev/ by ${{github.actor}}
-          text: A new version of Pokedex deployed
+          args: A new version of Pokedex deployed to https://full-stack-open-pokedex-megaeonise.fly.dev/ by ${{github.actor}}
   failure_notification:
     name: Failure notification
     runs-on: ubuntu-latest
     needs: [deploy]
     steps:
-      - uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+      - uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
         if: failure()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: error
-          details: commit https://github.com/megaeonise/full-stack-open-pokedex/commit/${{github.sha}} by ${{github.actor}} broke the build :(
-          text: Build failed
+          args: Build failed. Commit https://github.com/megaeonise/full-stack-open-pokedex/commit/${{github.sha}} by ${{github.actor}} broke the build :(
