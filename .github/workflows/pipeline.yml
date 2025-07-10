@@ -39,6 +39,7 @@ jobs:
     permissions:
       contents: write
     steps:
+      - run: echo "${{ !contains(toJson(github.event.commits.*.message), '#skip') && github.event_name == 'push' }}"
       - uses: actions/checkout@v4
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.73.0
