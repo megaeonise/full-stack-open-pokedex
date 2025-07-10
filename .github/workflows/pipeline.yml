@@ -33,11 +33,14 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   tag_release:
+    if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-22.04
-    if: ${{ github.event_name == 'push' }}
+    permissions:
+      contents: write
     steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.73.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
