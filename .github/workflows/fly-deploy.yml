@@ -31,7 +31,7 @@ jobs:
   failure_notification:
     name: Failure notification
     runs-on: ubuntu-latest
-    needs: [deploy]
+    concurrency: deploy-group
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
