@@ -1,5 +1,8 @@
 name: Deployment pipeline
 
+env:
+  CONDITION: ${{ !contains(toJson(github.event.commits.*.message), '#skip') && github.event_name == 'push' }}
+
 on:
   push:
     branches:
@@ -33,7 +36,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   tag_release:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ env.CONDITION == 'true' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-22.04
     permissions:
