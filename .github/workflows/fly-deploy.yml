@@ -20,7 +20,9 @@ jobs:
   success_notification:
     name: Success notification
     runs-on: ubuntu-latest
-    concurrency: deploy-group
+    needs: [deploy]
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
       - uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
         if: success()
@@ -29,7 +31,9 @@ jobs:
   failure_notification:
     name: Failure notification
     runs-on: ubuntu-latest
-    concurrency: deploy-group
+    needs: [deploy]
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
       - uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
         if: failure()
