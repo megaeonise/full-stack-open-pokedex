@@ -17,4 +17,4 @@ jobs:
           # Check the following URLs one by one sequentially
           url: https://full-stack-open-pokedex-megaeonise.fly.dev/health
           follow-redirect: false
-          max-attempts: 1
+          max-attempts: 2
